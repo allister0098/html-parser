@@ -1,0 +1,13 @@
+html-parser.cc
+html-parser.hh
+html-scanner.cc
+html-parser.tab.cc
+html-parser.tab.hh
+lex.yy.cc
+*.o
+*.out
+location.hh
+position.hh
+stack.hh
+test
+.idea
