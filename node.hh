@@ -6,11 +6,13 @@
 
 class Node {
   public:
-    Node();
-    virtual ~Node();
     std::list<Node*> children; 
-    virtual std::string data();
-    virtual std::string nodeName();
+
+    virtual ~Node() {};
+    Node() {}
+
+    virtual std::string data() { return "node"; };
+    virtual std::string nodeName() { return "node"; };
 };
 
 #endif

@@ -8,19 +8,19 @@
 
 #define YY_DECL \
   yy::html_parser::symbol_type yylex (html_driver& driver)
+
 YY_DECL;
 
 class html_driver
 {
+private:
+  Document document;
+
 public:
   html_driver ();
   virtual ~html_driver ();
 
-  std::map<std::string, int> variables;
-
   int result;
-
-  Document document;
 
   // Handling the scanner.
   void scan_begin ();

@@ -58,7 +58,7 @@ characters:
 
 html:
   CHARACTER characters { std::cout << $1 << std::endl; }
-| COMMENT characters    { driver.addComment($1); } 
+| COMMENT characters    { std::cout << $1 << std::endl; driver.addComment($1); } 
 | START_TAG characters END_TAG {}
 
 %%

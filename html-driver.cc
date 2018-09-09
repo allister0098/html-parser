@@ -2,11 +2,8 @@
 #include "html-parser.hh"
 
 html_driver::html_driver ()
-  : trace_scanning (false), trace_parsing (false)
+  :  trace_scanning (false), trace_parsing (false)
 {
-  document = Document();
-  variables["one"] = 1;
-  variables["two"] = 2;
 }
 
 html_driver::~html_driver ()
@@ -39,7 +36,6 @@ html_driver::error (const std::string& m)
 
 void
 html_driver::addComment(const std::string data) {
-  Node* comment = new Comment(data);
-  document.children.push_back(comment);
+  document.children.push_back(new Comment(data));
 }
 
