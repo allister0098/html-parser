@@ -10,6 +10,7 @@
 %code requires
 {
   #include <string>
+  #include "node.hh"
   class html_driver;
 }
 
@@ -34,32 +35,33 @@
 %define api.token.prefix {TOK_}
 %token
   END  0  "end of file"
-  START_TAG
-  END_TAG
-  START_CMT
-  END_CMT
+  TAG_OPEN
+  END_TAG_OPEN
+  TAG_CLOSE
 ;
 
 %token <std::string>CHARACTER
 %token <std::string>COMMENT
-%token <int> NUMBER "number"
-
-%printer { yyoutput << $$; } <*>;
+%token <Node>TAG_TYPE
+%token <std::string>TEXT
 
 %%
-%start unit;
-unit: characters html  { };
+%start htmlElements;
 
+htmlElements:
+  %empty {}
+| TEXT htmlElements { std::cout << $1 << std::endl; }
+| htmlComment htmlElements {}
+| htmlElement {}
 
-characters:
-  %empty          {}
-| characters html {};
+htmlComment:
+  COMMENT { std::cout << $1 << std::endl; driver.addComment($1); }
 
-
-html:
-  CHARACTER characters { std::cout << $1 << std::endl; }
-| COMMENT characters    { std::cout << $1 << std::endl; driver.addComment($1); } 
-| START_TAG characters END_TAG {}
+htmlElement:
+  TAG_OPEN TAG_TYPE TAG_CLOSE htmlElements END_TAG_OPEN TAG_TYPE TAG_CLOSE
+  {
+    driver.addNode($2);
+  }
 
 %%
 

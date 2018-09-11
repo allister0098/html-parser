@@ -2,9 +2,11 @@
 #define HTML_DRIVER_HH
 #include <string>
 #include <map>
+#include "node.hh"
 #include "html-parser.hh"
 #include "document.hh"
 #include "comment.hh"
+#include "htmlHtmlElement.hh"
 
 #define YY_DECL \
   yy::html_parser::symbol_type yylex (html_driver& driver)
@@ -39,6 +41,9 @@ public:
 
   // Handling the document.
   void addComment(const std::string data);
+
+  void addHTML();
+  void addNode(Node node);
 };
 #endif
 

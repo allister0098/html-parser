@@ -39,3 +39,13 @@ html_driver::addComment(const std::string data) {
   document.children.push_back(new Comment(data));
 }
 
+void
+html_driver::addHTML() {
+  document.children.push_back(new htmlHTMLElement());
+}
+
+void
+html_driver::addNode(Node node) {
+  document.children.push_back(node);
+}
+

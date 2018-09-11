@@ -8,6 +8,7 @@
 class htmlHTMLElement : public HTMLElement {
   public:
     virtual ~htmlHTMLElement() {};
+    virtual std::string nodeName() { return "HTML"; };
 };
 
 #endif

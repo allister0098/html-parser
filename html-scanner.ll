@@ -18,11 +18,12 @@
 %pointer
 %array
 
+htmlComment <!--.*?-->
+htmlText    [^<]+
+tagName     [[:alpha:]]+
 id    [a-zA-Z][a-zA-Z_0-9]*
-cmt   [^->]+
 int   [0-9]+
 blank [ \t]
-alpha [[:alpha:]]
 
 %{
   // Code run each time a pattern is matched.
@@ -30,13 +31,6 @@ alpha [[:alpha:]]
 %}
 
 %x TAG_OPEN
-%x MARK_UP 
-%x TAG_NAME 
-%x CMT_S
-%x CMT_S_D
-%x CMT
-%x CMT_E
-%x CMT_E_D
 
 
 %%
@@ -49,18 +43,13 @@ alpha [[:alpha:]]
 {blank}+           loc.step ();
 [\n]+              loc.lines (yyleng); loc.step ();
 
-<CMT_E>">"         BEGIN(INITIAL); return yy::html_parser::make_COMMENT(comment, loc);
-<CMT_E_D>"-"       BEGIN(CMT_E); 
-<CMT>"-"           BEGIN(CMT_E_D); 
-<CMT_S_D>{cmt}     BEGIN(CMT); comment = yytext; printf("%s", comment.c_str());
-<CMT_S>"-"         BEGIN(CMT_S_D);
-<MARK_UP>"-"       BEGIN(CMT_S);
-<TAG_OPEN>{alpha}  BEGIN(TAG_NAME);
-<TAG_OPEN>"!"      BEGIN(MARK_UP);
-{alpha}            return yy::html_parser::make_CHARACTER(comment, loc);
-"<"                BEGIN(TAG_OPEN); 
-.                  driver.error (loc, "invalid character");
-
+<TAG_OPEN>">"      BEGIN(INITIAL);return yy::html_parser::make_TAG_CLOSE(loc);
+<TAG_OPEN>"html"   return yy::html_parser::make_TAG_TYPE(htmlHTMLElement(), loc);
+                
+{htmlText}         return yy::html_parser::make_TEXT(yytext, loc);
+{htmlComment}      return yy::html_parser::make_COMMENT(yytext, loc);
+"</"                BEGIN(TAG_OPEN); return yy::html_parser::make_END_TAG_OPEN(loc);
+"<"                 BEGIN(TAG_OPEN); return yy::html_parser::make_TAG_OPEN(loc);
 %%
 
 
