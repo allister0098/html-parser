@@ -7,6 +7,7 @@
 #include "document.hh"
 #include "comment.hh"
 #include "htmlHtmlElement.hh"
+#include "htmlParagraphElement.hh"
 
 #define YY_DECL \
   yy::html_parser::symbol_type yylex (html_driver& driver)

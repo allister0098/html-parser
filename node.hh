@@ -9,6 +9,7 @@ enum class NodeType {
   Document,
   Comment,
   HTMLElement,
+  Paragraph
 };
 
 class Node {
@@ -48,6 +49,8 @@ class Node {
         return "#comment";
       } else if (this->nodeType == NodeType::HTMLElement){
         return "#html";
+      } else if (this->nodeType == NodeType::Paragraph){
+        return "p";
       } else {
         return "#node";
       }

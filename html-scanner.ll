@@ -43,13 +43,15 @@ blank [ \t]
 {blank}+           loc.step ();
 [\n]+              loc.lines (yyleng); loc.step ();
 
-<TAG_OPEN>">"      BEGIN(INITIAL);return yy::html_parser::make_TAG_CLOSE(loc);
-<TAG_OPEN>"html"   return yy::html_parser::make_TAG_TYPE(htmlHTMLElement(), loc);
-                
 {htmlText}         return yy::html_parser::make_TEXT(yytext, loc);
 {htmlComment}      return yy::html_parser::make_COMMENT(yytext, loc);
 "</"                BEGIN(TAG_OPEN); return yy::html_parser::make_END_TAG_OPEN(loc);
 "<"                 BEGIN(TAG_OPEN); return yy::html_parser::make_TAG_OPEN(loc);
+
+<TAG_OPEN>">"      BEGIN(INITIAL);return yy::html_parser::make_TAG_CLOSE(loc);
+<TAG_OPEN>"html"   return yy::html_parser::make_TAG_TYPE(htmlHTMLElement(), loc);
+<TAG_OPEN>"p"      return yy::html_parser::make_TAG_TYPE(htmlParagraphElement(), loc);
+                
 %%
 
 
