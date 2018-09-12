@@ -9,10 +9,12 @@ class Comment : public HTMLElement {
     std::string _data;
 
   public:
-    Comment(std::string d) : _data(d) {};
+    Comment(std::string d) : _data(d) {
+    nodeType = NodeType::Comment;
+    };
     virtual ~Comment() {};
     std::string data() { return _data; };
-    std::string nodeName() { return "#comment"; };
+    std::string nodeName() { return "#comment"; }
 };
 
 #endif

@@ -15,5 +15,9 @@ main (int argc, char *argv[])
       std::cout << driver.result << '\n';
     else
       res = 1;
+
+  for (Node* node : driver.document.children) {
+    std::cout << node->nodeName() << std::endl;
+  }
   return res;
 }

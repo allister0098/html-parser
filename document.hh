@@ -5,9 +5,10 @@
 
 class Document : public HTMLElement {
   public:
-    Document(){};
+    Document(){
+      nodeType = NodeType::Document;
+    };
     virtual ~Document() {};
-    std::string nodeName() { return "#document"; };
 };
 
 #endif

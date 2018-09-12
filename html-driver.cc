@@ -45,7 +45,7 @@ html_driver::addHTML() {
 }
 
 void
-html_driver::addNode(Node node) {
+html_driver::addNode(Node* node) {
   document.children.push_back(node);
 }
 

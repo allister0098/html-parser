@@ -60,7 +60,7 @@ htmlComment:
 htmlElement:
   TAG_OPEN TAG_TYPE TAG_CLOSE htmlElements END_TAG_OPEN TAG_TYPE TAG_CLOSE
   {
-    driver.addNode($2);
+    driver.addNode(&$2);
   }
 
 %%

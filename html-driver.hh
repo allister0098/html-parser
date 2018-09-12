@@ -15,13 +15,11 @@ YY_DECL;
 
 class html_driver
 {
-private:
-  Document document;
-
 public:
   html_driver ();
   virtual ~html_driver ();
 
+  Document document;
   int result;
 
   // Handling the scanner.
@@ -43,7 +41,7 @@ public:
   void addComment(const std::string data);
 
   void addHTML();
-  void addNode(Node node);
+  void addNode(Node* node);
 };
 #endif
 

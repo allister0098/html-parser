@@ -4,6 +4,13 @@
 #include <string>
 #include <list>
 
+enum class NodeType {
+  Node,
+  Document,
+  Comment,
+  HTMLElement,
+};
+
 class Node {
   private:
     class base {
@@ -23,7 +30,8 @@ class Node {
     base* typePtr;
 
   public:
-    std::list<Node> children;
+    NodeType nodeType;
+    std::list<Node*> children;
 
     virtual ~Node() {};
     Node() {
@@ -33,7 +41,17 @@ class Node {
     template<typename T>
     Node(T const& node) : typePtr(new type<T>(node)) {}
 
-    virtual std::string nodeName() { return "node"; };
+    std::string nodeName() {
+      if (this->nodeType == NodeType::Document) {
+        return "#document";
+      } else if (this->nodeType == NodeType::Comment){
+        return "#comment";
+      } else if (this->nodeType == NodeType::HTMLElement){
+        return "#html";
+      } else {
+        return "#node";
+      }
+    };
 
     template<typename T>
     inline const T& get() const {
