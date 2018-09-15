@@ -1,11 +1,11 @@
 #ifndef DOCUMENT_HH
 #define DOCUMENT_HH
 
-#include "htmlElement.hh"
+#include "node.hh"
 
-class Document : public HTMLElement {
+class Document : public Node {
   public:
-    Document(){
+    Document() {
       nodeType = NodeType::Document;
     };
     virtual ~Document() {};

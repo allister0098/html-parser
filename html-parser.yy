@@ -50,12 +50,12 @@
 
 htmlElements:
   %empty {}
-| TEXT htmlElements { std::cout << $1 << std::endl; }
+| TEXT htmlElements { }
 | htmlComment htmlElements {}
 | htmlElement {}
 
 htmlComment:
-  COMMENT { std::cout << $1 << std::endl; driver.addComment($1); }
+  COMMENT { driver.addComment($1); }
 
 htmlElement:
   TAG_OPEN TAG_TYPE TAG_CLOSE htmlElements END_TAG_OPEN TAG_TYPE TAG_CLOSE

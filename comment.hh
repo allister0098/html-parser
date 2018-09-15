@@ -2,15 +2,15 @@
 #define COMMENT_HH
 
 #include <string>
-#include "htmlElement.hh"
+#include "node.hh"
 
-class Comment : public HTMLElement {
+class Comment : public Node {
   private:
     std::string _data;
 
   public:
     Comment(std::string d) : _data(d) {
-    nodeType = NodeType::Comment;
+      nodeType = NodeType::Comment;
     };
     virtual ~Comment() {};
     std::string data() { return _data; };

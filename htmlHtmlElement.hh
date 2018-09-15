@@ -8,7 +8,7 @@
 class htmlHTMLElement : public HTMLElement {
   public:
     virtual ~htmlHTMLElement() {};
-    htmlHTMLElement() {
+    htmlHTMLElement() : HTMLElement("HTML") {
       nodeType = NodeType::HTMLElement;
     }
 };

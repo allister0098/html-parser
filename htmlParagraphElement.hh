@@ -8,7 +8,7 @@
 class htmlParagraphElement : public HTMLElement {
   public:
     virtual ~htmlParagraphElement() {};
-    htmlParagraphElement() {
+    htmlParagraphElement() : HTMLElement("P") {
       nodeType = NodeType::Paragraph;
     }
 };
